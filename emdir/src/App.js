@@ -60,11 +60,17 @@ function App() {
   return (
     <>
       <div className="App">
-        <div className="jumbotron jumbotron-fluid">
+        <div className="jumbotron  bg-dark text-white jumbotron-fluid">
           <div className="container">
             <h1 className="display-4">Employee Directory</h1>
-            <p className="lead">Search</p>
-            <input onChange={handleInputChange}></input>
+            <p className="lead"></p>
+
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Search</span>
+              </div>
+              <input onChange={handleInputChange} placeholder="Name"></input>
+            </div>
           </div>
         </div>
 
