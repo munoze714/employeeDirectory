@@ -83,7 +83,7 @@ function App() {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col"></th>
               <th scope="col">First</th>
               <th scope="col">Phone</th>
               <th scope="col">Email</th>
@@ -98,10 +98,11 @@ function App() {
                   </td>
                   <td> {emp.name} </td>
                   <td>
-                    {" "}
-                    <a href="tel:+900300400">{emp.phone}</a>
+                    <a href={"tel:+" + emp.phone}>{emp.phone}</a>
                   </td>
-                  <td> {emp.email} </td>
+                  <td>
+                    <a href={"mailto:" + emp.email}>{emp.email}</a>
+                  </td>
                 </tr>
               );
             })}
