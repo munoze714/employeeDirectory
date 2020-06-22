@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import SearchForm from "./components/SearchForm";
 import API from "./utils/API";
 
 function App() {
@@ -12,9 +11,10 @@ function App() {
   useEffect(() => {
     API.getEmployee()
       .then((res) => {
-        console.log("this is our dataaa", res.data.results);
+        // console.log("this is our dataaa", res.data.results);
         var newEmps = [];
         var data = res.data.results;
+
         for (var i = 0; i < data.length; i++) {
           var emp = {
             name: data[i].name.first + " " + data[i].name.last,
@@ -26,32 +26,31 @@ function App() {
         }
         console.log("new data", newEmps);
         setState({ ...state, employees: newEmps });
-
-        //this.setState({ employee: res.results })
       })
       .catch((err) => console.log(err));
   }, []);
 
   var handleInputChange = (event) => {
     var newFiltered = [];
+
     state.employees.forEach((empSearch) => {
-      console.log("what they serached", event.target.value.toLowerCase());
-      console.log(
-        empSearch.name.substring(0, event.target.value.length).toLowerCase()
-      );
+      // console.log("what they serached", event.target.value.toLowerCase());
+      // console.log(
+      //   empSearch.name.substring(0, event.target.value.length).toLowerCase()
+      // );
       if (
         event.target.value.toLowerCase() ===
         empSearch.name.substring(0, event.target.value.length).toLowerCase()
       ) {
-        console.log(" we found a match!! keep for filtered!!", empSearch);
+        // console.log(" we found a match!! keep for filtered!!", empSearch);
         newFiltered.push(empSearch);
       }
     });
-    console.log("these r the filted ppl", newFiltered);
+    // console.log("these r the filted ppl", newFiltered);
     setState({ ...state, filteredEmployees: newFiltered });
   };
 
-  console.log(state);
+  // console.log(state);
   var empsToDisplay = state.employees;
 
   if (state.filteredEmployees.length > 0) {
