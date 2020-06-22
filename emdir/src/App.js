@@ -5,6 +5,7 @@ import API from "./utils/API";
 function App() {
   const [state, setState] = useState({
     employees: [],
+    filteredEmployees: [],
   });
 
   // When the component mounts, get a list of all available base breeds and update this.state.breeds
@@ -31,9 +32,24 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  // handleInputChange = event => {
-
-  // };
+  var handleInputChange = (event) => {
+    var newFiltered = [];
+    state.employees.forEach((empSearch) => {
+      console.log("what they serached", event.target.value.toLowerCase());
+      console.log(
+        empSearch.name.substring(0, event.target.value.length).toLowerCase()
+      );
+      if (
+        event.target.value.toLowerCase() ===
+        empSearch.name.substring(0, event.target.value.length).toLowerCase()
+      ) {
+        console.log(" we found a match!! keep for filtered!!", empSearch);
+        newFiltered.push(empSearch);
+      }
+    });
+    console.log("these r the filted ppl", newFiltered);
+    setState({ ...state, filteredEmployees: newFiltered });
+  };
 
   // handleFormSubmit = event => {
   //   event.preventDefault();
@@ -47,22 +63,31 @@ function App() {
   //     .catch(err => this.setState({ error: err.message }));
   // };
   console.log(state);
+  var empsToDisplay = state.employees;
+
+  if (state.filteredEmployees.length > 0) {
+    empsToDisplay = state.filteredEmployees;
+  }
+
   return (
     <>
       <div className="App">
+        <input onChange={handleInputChange}></input>
         <table>
-          {state.employees.map((emp) => {
-            return (
-              <tr>
-                <td>{emp.name}</td>
-                <td>{emp.phone}</td>
-                <td>{emp.email}</td>
-                <td>
-                  <img src={emp.pic}></img>
-                </td>
-              </tr>
-            );
-          })}
+          <tbody>
+            {empsToDisplay.map((emp, i) => {
+              return (
+                <tr key={i}>
+                  <td>{emp.name}</td>
+                  <td>{emp.phone}</td>
+                  <td>{emp.email}</td>
+                  <td>
+                    <img src={emp.pic}></img>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       </div>
     </>
