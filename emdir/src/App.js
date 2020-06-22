@@ -50,7 +50,20 @@ function App() {
   return (
     <>
       <div className="App">
-        <SearchForm />
+        <table>
+          {state.employees.map((emp) => {
+            return (
+              <tr>
+                <td>{emp.name}</td>
+                <td>{emp.phone}</td>
+                <td>{emp.email}</td>
+                <td>
+                  <img src={emp.pic}></img>
+                </td>
+              </tr>
+            );
+          })}
+        </table>
       </div>
     </>
   );
