@@ -51,17 +51,6 @@ function App() {
     setState({ ...state, filteredEmployees: newFiltered });
   };
 
-  // handleFormSubmit = event => {
-  //   event.preventDefault();
-  //   API.getEmployee(this.state.search)
-  //     .then(res => {
-  //       if (res.data.status === "error") {
-  //         throw new Error(res.data.message);
-  //       }
-  //       this.setState({ results: res.data. });
-  //     })
-  //     .catch(err => this.setState({ error: err.message }));
-  // };
   console.log(state);
   var empsToDisplay = state.employees;
 
