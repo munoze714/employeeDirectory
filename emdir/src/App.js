@@ -1,25 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import SearchForm from "./components/SearchForm";
+import API from "./utils/API";
 
 function App() {
+  const [] = useState;
+
+  // When the component mounts, get a list of all available base breeds and update this.state.breeds
+  componentDidMount(){
+    API.getEmployee()
+      .then(res => this.setState({ employee: res.data }))
+      .catch(err => console.log(err));
+  }
+
+  handleInputChange = event => {
+
+  };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    API.getEmployee(this.state.search)
+      .then(res => {
+        if (res.data.status === "error") {
+          throw new Error(res.data.message);
+        }
+        this.setState({ results: res.data. });
+      })
+      .catch(err => this.setState({ error: err.message }));
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="App">
+        <SearchForm />
+      </div>
+    </>
   );
 }
 
