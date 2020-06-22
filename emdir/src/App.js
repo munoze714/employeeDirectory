@@ -72,18 +72,36 @@ function App() {
   return (
     <>
       <div className="App">
-        <input onChange={handleInputChange}></input>
-        <table>
+        <div className="jumbotron jumbotron-fluid">
+          <div className="container">
+            <h1 className="display-4">Employee Directory</h1>
+            <p className="lead">Search</p>
+            <input onChange={handleInputChange}></input>
+          </div>
+        </div>
+
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Email</th>
+            </tr>
+          </thead>
           <tbody>
             {empsToDisplay.map((emp, i) => {
               return (
                 <tr key={i}>
-                  <td>{emp.name}</td>
-                  <td>{emp.phone}</td>
-                  <td>{emp.email}</td>
                   <td>
                     <img src={emp.pic}></img>
                   </td>
+                  <td> {emp.name} </td>
+                  <td>
+                    {" "}
+                    <a href="tel:+900300400">{emp.phone}</a>
+                  </td>
+                  <td> {emp.email} </td>
                 </tr>
               );
             })}
