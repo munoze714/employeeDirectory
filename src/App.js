@@ -21,6 +21,7 @@ function App() {
             email: data[i].email,
             phone: data[i].phone,
             pic: data[i].picture.thumbnail,
+            dob: data[i].dob.date,
           };
           newEmps.push(emp);
         }
@@ -28,7 +29,7 @@ function App() {
         setState({ ...state, employees: newEmps });
       })
       .catch((err) => console.log(err));
-  }, []);
+  });
 
   var handleInputChange = (event) => {
     var newFiltered = [];
@@ -65,9 +66,9 @@ function App() {
             <h1 className="display-4">Employee Directory</h1>
             <p className="lead"></p>
 
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Search</span>
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <span className="input-group-text">Search</span>
               </div>
               <input onChange={handleInputChange} placeholder="Name"></input>
             </div>
@@ -81,6 +82,7 @@ function App() {
               <th scope="col">First</th>
               <th scope="col">Phone</th>
               <th scope="col">Email</th>
+              <th scope="col">Date of Birth</th>
             </tr>
           </thead>
           <tbody>
@@ -88,7 +90,7 @@ function App() {
               return (
                 <tr key={i}>
                   <td>
-                    <img src={emp.pic}></img>
+                    <img src={emp.pic} alt="avatar"></img>
                   </td>
                   <td> {emp.name} </td>
                   <td>
@@ -97,6 +99,7 @@ function App() {
                   <td>
                     <a href={"mailto:" + emp.email}>{emp.email}</a>
                   </td>
+                  <td> {emp.dob} </td>
                 </tr>
               );
             })}
